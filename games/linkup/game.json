@@ -1,0 +1,17 @@
+{
+  "id": "linkup",
+  "title": "连连看",
+  "subtitle": "Link Match",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [{ "id": "hint", "label": "提示" }, { "id": "shuffle", "label": "洗牌" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#38bdf8",
+  "accent2": "#f472b6",
+  "desc": "点击两张相同图案，用不超过两次拐弯的路径连通即可消除；边界外也可绕行一圈。",
+  "hint": "点选两张相同图案配对 · 提示消耗次数 · 洗牌保证有解",
+  "order": 8,
+  "turnBased": true,
+  "audio": true
+}

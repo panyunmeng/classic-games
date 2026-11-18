@@ -1,0 +1,17 @@
+{
+  "id": "memory",
+  "title": "记忆翻牌",
+  "subtitle": "Memo Match",
+  "category": "casual",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [{ "id": "undo", "label": "撤销" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#c084fc",
+  "accent2": "#f0abfc",
+  "desc": "翻开两张卡片寻找相同图案，配对成功即消除得分；全部配对完成即获胜。三档难度可选，支持撤销。",
+  "hint": "点击卡片翻牌 · U / 撤销按钮回退",
+  "order": 8,
+  "turnBased": true,
+  "audio": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "gomoku",
+  "title": "五子棋",
+  "subtitle": "Gomoku",
+  "category": "board",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["tap", "keys"],
+  "buttons": [{ "id": "undo", "label": "悔棋" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#e8a33a",
+  "accent2": "#5fd08a",
+  "desc": "15×15 棋盘，黑白交替落子，先形成五连者获胜；棋盘落满则和棋。支持人机、同屏双人与联机。",
+  "hint": "点击交叉点或方向键移动光标 + Enter 落子 · U 悔棋",
+  "order": 6,
+  "turnBased": true,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

@@ -1,0 +1,20 @@
+{
+  "id": "freecell",
+  "title": "空当接龙",
+  "subtitle": "Free Cell",
+  "category": "card",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [
+    { "id": "auto", "label": "自动收" },
+    { "id": "undo", "label": "撤销" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#60a5fa",
+  "accent2": "#93c5fd",
+  "desc": "一副牌全翻开分 8 列，靠 4 个自由格周转，把 52 张按花色 A→K 收进 4 个基础堆。",
+  "hint": "点牌选源 → 点目标移动 · 自由格各存 1 张 · 空列可放任意牌，整组搬迁受空格/空列数限制",
+  "order": 35,
+  "turnBased": true,
+  "audio": true
+}

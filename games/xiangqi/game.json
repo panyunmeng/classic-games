@@ -1,0 +1,19 @@
+{
+  "id": "xiangqi",
+  "title": "中国象棋",
+  "subtitle": "Chess Classic",
+  "category": "board",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["tap", "keys"],
+  "buttons": [{ "id": "undo", "label": "悔棋" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#ef4444",
+  "accent2": "#fca5a5",
+  "desc": "9×10 棋盘、楚河汉界：车马炮象士将全套走子规则，含将军/应将/绝杀/困毙。支持人机、同屏双人与联机。",
+  "hint": "点自己的子再点落点走棋 · 方向键移光标 · Enter 选中/落子 · U 悔棋",
+  "order": 32,
+  "turnBased": true,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

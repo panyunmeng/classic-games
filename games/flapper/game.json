@@ -1,0 +1,16 @@
+{
+  "id": "flapper",
+  "title": "单键飞行",
+  "subtitle": "One-Key Fly",
+  "category": "casual",
+  "modes": ["solo"],
+  "inputs": ["tap", "action"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#facc15",
+  "accent2": "#f97316",
+  "desc": "点击或按键给出向上冲量，控制发光飞行器穿过光栅；撞管道或边界即结束，速度随分数略增。",
+  "hint": "点击画面 / 空格 / ↑ 上升 · R 重开",
+  "order": 23,
+  "turnBased": false,
+  "audio": true
+}

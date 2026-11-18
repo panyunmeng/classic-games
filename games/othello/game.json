@@ -1,0 +1,18 @@
+{
+  "id": "othello",
+  "title": "黑白棋",
+  "subtitle": "Disc Flip",
+  "category": "board",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["tap", "keys"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#34d399",
+  "accent2": "#a7f3d0",
+  "desc": "8×8 棋盘，黑先。落子须在八方向夹住对方棋子并翻转，无合法着法自动跳过，终局子多者胜。支持人机、同屏双人与联机。",
+  "hint": "点击亮点落子 · 方向键移动光标 + Enter 落子",
+  "order": 7,
+  "turnBased": true,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

@@ -1,0 +1,18 @@
+{
+  "id": "pong",
+  "title": "乒乓对决",
+  "subtitle": "Pong Duel",
+  "category": "arcade",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["drag", "keys"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#f472b6",
+  "accent2": "#fb7185",
+  "desc": "上方与下方各守一拍，接球落点决定反弹角，先得 11 分者获胜。",
+  "hint": "单人：W/S 或拖拽控制下拍 · 双人：上方 W/S、下方 ↑↓ · 空格 / 点击发球",
+  "order": 21,
+  "turnBased": false,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

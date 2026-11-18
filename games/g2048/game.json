@@ -1,0 +1,17 @@
+{
+  "id": "g2048",
+  "title": "2048",
+  "subtitle": "Slide & Merge",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["swipe", "keys"],
+  "buttons": [{ "id": "undo", "label": "撤销" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#f2b84b",
+  "accent2": "#ff8a5c",
+  "desc": "上下左右滑动合并相同数字，凑出 2048。每一步都会在空格生成新数字，走错可以撤销一步。",
+  "hint": "滑动 / 方向键移动 · U 撤销",
+  "order": 4,
+  "turnBased": false,
+  "audio": true
+}

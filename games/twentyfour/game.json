@@ -1,0 +1,24 @@
+{
+  "id": "twentyfour",
+  "title": "24 点",
+  "subtitle": "Make 24",
+  "category": "casual",
+  "modes": ["solo", "local2p"],
+  "inputs": ["tap"],
+  "buttons": [
+    { "id": "op-add", "label": "+" },
+    { "id": "op-sub", "label": "-" },
+    { "id": "op-mul", "label": "×" },
+    { "id": "op-div", "label": "÷" },
+    { "id": "undo", "label": "撤销" },
+    { "id": "skip", "label": "跳过" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#fb923c",
+  "accent2": "#fdba74",
+  "desc": "发四张数字牌，用加减乘除与括号把它们凑成 24。每张牌恰好用一次，能凑出多解更好。",
+  "hint": "点两张牌 → 选运算符合并 · 每张牌只用一次",
+  "order": 36,
+  "turnBased": true,
+  "audio": true
+}

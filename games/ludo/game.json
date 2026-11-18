@@ -1,0 +1,18 @@
+{
+  "id": "ludo",
+  "title": "飞行棋",
+  "subtitle": "Race Board",
+  "category": "board",
+  "modes": ["solo", "ai", "local2p"],
+  "inputs": ["tap"],
+  "buttons": [{ "id": "roll", "label": "掷骰" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#facc15",
+  "accent2": "#f472b6",
+  "desc": "红蓝各 4 子从基地出发，绕 52 格环道一圈再进 6 格终点跑道。掷出点数走子，踩到对手的非安全格棋子把它撞回基地，6 点再掷一次；4 子先全部到终点者胜。",
+  "hint": "掷骰：点骰子面板或空格 · 走子：点自己的棋子 · 6 点再掷一次",
+  "order": 33,
+  "turnBased": true,
+  "audio": true,
+  "ai": true
+}

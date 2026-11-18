@@ -1,0 +1,20 @@
+{
+  "id": "spider",
+  "title": "蜘蛛纸牌",
+  "subtitle": "Spider Cards",
+  "category": "card",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [
+    { "id": "deal", "label": "发牌" },
+    { "id": "undo", "label": "撤销" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#f59e0b",
+  "accent2": "#fbbf24",
+  "desc": "两副 104 张牌分 10 列，同花色递减序列可整体移动，凑齐同花色 K→A 十三张自动收走，收满 8 组即胜。",
+  "hint": "点牌选源 → 点目标移动 · 同花色连续递减序列可整体拖动 · 点发牌堆发一轮",
+  "order": 16,
+  "turnBased": true,
+  "audio": true
+}

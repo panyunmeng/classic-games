@@ -1,0 +1,10 @@
+#!/bin/bash
+# 卸载前：先停服务并清理 socket。
+# 不清理会在安装目录留下 app.sock，同名文件会让下次安装绑不上。
+set -u
+MAIN="${TRIM_APPDEST:-}/cmd/main"
+if [ -x "${MAIN}" ]; then
+    "${MAIN}" stop >/dev/null 2>&1 || true
+fi
+[ -n "${TRIM_APPDEST:-}" ] && rm -f "${TRIM_APPDEST}/app.sock"
+exit 0

@@ -1,0 +1,17 @@
+{
+  ".url": {
+    "classic-games.main": {
+      "title": "经典游戏合集",
+      "icon": "images/icon_{0}.png",
+      "type": "iframe",
+      "protocol": "",
+      "gatewayPrefix": "/app/classic-games",
+      "gatewaySocket": "app.sock",
+      "url": "/app/classic-games",
+      "allUsers": true,
+      "control": {
+        "accessPerm": "readonly"
+      }
+    }
+  }
+}

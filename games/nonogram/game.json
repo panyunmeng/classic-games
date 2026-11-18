@@ -1,0 +1,22 @@
+{
+  "id": "nonogram",
+  "title": "数织",
+  "subtitle": "Nonogram",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [
+    { "id": "hint", "label": "提示" },
+    { "id": "undo", "label": "撤销" },
+    { "id": "reset", "label": "重置" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#2dd4bf",
+  "accent2": "#99f6e4",
+  "desc": "10×10 网格旁给出每行每列连续填充段的数字（如 3,1 表示两段 3 格与 1 格，段间至少空一格）。点格填充、再点取消，长按或右键标 X 排除，全部填充与原图一致即胜。",
+  "hint": "点按填充/取消 · 长按或右键标 X · 提示/撤销/重置按钮",
+  "order": 26,
+  "turnBased": true,
+  "audio": true,
+  "level": 2
+}

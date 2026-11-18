@@ -1,0 +1,6 @@
+build/
+node_modules/
+.agents/work/screens/
+.agents/work/*.log
+.agents/work/chrome-profile*/
+*.tmp

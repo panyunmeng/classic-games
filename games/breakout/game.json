@@ -1,0 +1,16 @@
+{
+  "id": "breakout",
+  "title": "打砖块",
+  "subtitle": "Neon Breakout",
+  "category": "arcade",
+  "modes": ["solo"],
+  "inputs": ["drag", "keys"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#4fc7ff",
+  "accent2": "#63f2b6",
+  "desc": "挡板反弹球击碎所有砖块；落点决定反弹角，接住道具获得多球、加宽或慢球。",
+  "hint": "←→ 或拖拽挡板 · 空格 / 点击发球",
+  "order": 2,
+  "turnBased": false,
+  "audio": true
+}

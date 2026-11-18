@@ -1,0 +1,16 @@
+{
+  "id": "beanmaze",
+  "title": "豆豆迷宫",
+  "subtitle": "Bean Maze",
+  "category": "arcade",
+  "modes": ["solo"],
+  "inputs": ["keys", "swipe"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#fbbf24",
+  "accent2": "#60a5fa",
+  "desc": "在霓虹迷宫里吃光所有豆子，吃下能量豆即可反吃四只追击小精灵。",
+  "hint": "方向键 / WASD / 滑动控制方向 · 空格开始 · 3 条命",
+  "order": 9,
+  "turnBased": false,
+  "audio": true
+}

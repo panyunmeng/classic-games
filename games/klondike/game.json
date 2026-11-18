@@ -1,0 +1,21 @@
+{
+  "id": "klondike",
+  "title": "纸牌接龙",
+  "subtitle": "Card Solitaire",
+  "category": "card",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [
+    { "id": "draw", "label": "发牌" },
+    { "id": "auto", "label": "自动收" },
+    { "id": "undo", "label": "撤销" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#4ade80",
+  "accent2": "#86efac",
+  "desc": "克朗代克玩法：把七列牌按红黑交替递减整理，四角回收区从 A 到 K 同花色堆叠，全部回收即获胜。",
+  "hint": "点牌选源 → 点目标移动 · 空列只放 K · 双击自动收",
+  "order": 15,
+  "turnBased": true,
+  "audio": true
+}

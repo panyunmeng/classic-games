@@ -1,0 +1,17 @@
+{
+  "id": "tilematch",
+  "title": "麻将消除",
+  "subtitle": "Tile Match",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [{ "id": "shuffle", "label": "重排" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#38bdf8",
+  "accent2": "#f9a8d4",
+  "desc": "分层牌堆，点两张相同且未被压住的顶层牌消除；30 秒倒计时，每消一对 +3 秒，全部消完通关。",
+  "hint": "点两张相同图案的顶层牌 · 无对可消时自动重排",
+  "order": 17,
+  "turnBased": true,
+  "audio": true
+}

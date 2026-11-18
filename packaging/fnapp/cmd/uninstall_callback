@@ -1,0 +1,9 @@
+#!/bin/bash
+# 卸载后：只清理本应用自己的日志与 PID。
+# 不动玩家数据（本就在浏览器里），不删共享目录——
+# 那里可能已被用户放了自己的文件。
+set -u
+if [ -n "${TRIM_PKGVAR:-}" ] && [ -d "${TRIM_PKGVAR}" ]; then
+    rm -f "${TRIM_PKGVAR}/app.pid" "${TRIM_PKGVAR}/app.log"
+fi
+exit 0

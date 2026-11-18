@@ -1,0 +1,18 @@
+{
+  "id": "snakebattle",
+  "title": "贪吃蛇大作战",
+  "subtitle": "Snake Battle",
+  "category": "action",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["keys", "swipe"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#4ade80",
+  "accent2": "#22d3ee",
+  "desc": "2～4 条蛇同场：吃散落食物变长加速，绕圈围杀对手；撞墙、撞自己或撞到别人的身体就出局，身体全部变成食物。最后存活者获胜，90 秒到按体长判。",
+  "hint": "方向键 / WASD / 滑动 / 屏幕方向键转向 · 单机你控绿色 P1 · 双人同屏 WASD 控 P1、方向键控 P2",
+  "order": 28,
+  "turnBased": false,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

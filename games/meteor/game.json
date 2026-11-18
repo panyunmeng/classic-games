@@ -1,0 +1,21 @@
+{
+  "id": "meteor",
+  "title": "陨石带",
+  "subtitle": "Meteor Field",
+  "category": "action",
+  "modes": ["solo"],
+  "inputs": ["keys", "action"],
+  "buttons": [
+    { "id": "rotate", "label": "转" },
+    { "id": "thrust", "label": "推" },
+    { "id": "shoot", "label": "开火" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#e2e8f0",
+  "accent2": "#94a3b8",
+  "desc": "惯性飞船在环形陨石带里穿行：←→ 旋转、↑ 推进、空格开火。大石裂中石、中石裂小石，清空一波更凶。",
+  "hint": "←→ 旋转 · ↑ 推进 · 空格开火（同时最多 4 发）· 触屏左半屏转向+推进、右半屏开火",
+  "order": 20,
+  "turnBased": false,
+  "audio": true
+}

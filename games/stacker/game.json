@@ -1,0 +1,23 @@
+{
+  "id": "stacker",
+  "title": "方块坠落",
+  "subtitle": "Stack Fall",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["keys", "swipe"],
+  "buttons": [
+    { "id": "left", "label": "◀" },
+    { "id": "right", "label": "▶" },
+    { "id": "rotate", "label": "转" },
+    { "id": "drop", "label": "落" },
+    { "id": "hold", "label": "存" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#7aa2ff",
+  "accent2": "#ffd166",
+  "desc": "方块从上方坠落，旋转拼接填满整行消除。支持暂存、幽灵落点与硬降，堆到顶即结束。",
+  "hint": "←→ 移动 · ↓ 软降 · 空格硬降 · 上/X 顺旋 · C/Z 逆旋 · Shift/H 暂存",
+  "order": 3,
+  "turnBased": false,
+  "audio": true
+}

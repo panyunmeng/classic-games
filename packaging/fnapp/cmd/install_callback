@@ -1,0 +1,28 @@
+#!/bin/bash
+# 安装后：校验产物完整性。
+#
+# 为什么安装期就要查：产物缺失时应用会「装上但点开空白」，
+# 用户只能看到一片白页，无从判断是安装没完成还是服务没起。
+# 在这里查出来，安装步骤会直接失败并说明缺什么。
+set -u
+
+ROOT="${TRIM_APPDEST:-}"
+
+[ -n "${ROOT}" ] || {
+    printf 'TRIM_APPDEST 缺失，安装环境异常\n' >"${TRIM_TEMP_LOGFILE:-/dev/null}"
+    exit 1
+}
+
+for need in "${ROOT}/www/index.html" "${ROOT}/www/manifest.json" "${ROOT}/server/index.mjs"; do
+    if [ ! -f "${need}" ]; then
+        printf '安装包不完整：缺少 %s\n' "${need}" >"${TRIM_TEMP_LOGFILE:-/dev/null}"
+        exit 1
+    fi
+done
+
+if [ ! -x /var/apps/nodejs_v24/target/bin/node ]; then
+    [ -n "${TRIM_TEMP_LOGFILE:-}" ] && \
+        printf '未检测到 Node.js v24 运行时，应用将无法启动。请先在应用中心安装 Node.js。\n' >"${TRIM_TEMP_LOGFILE}"
+fi
+
+exit 0

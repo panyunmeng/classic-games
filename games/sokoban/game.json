@@ -1,0 +1,21 @@
+{
+  "id": "sokoban",
+  "title": "推箱子",
+  "subtitle": "Box Push",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["keys", "swipe"],
+  "buttons": [
+    { "id": "undo", "label": "撤销" },
+    { "id": "redo", "label": "重做" },
+    { "id": "next", "label": "下一关" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#e3a636",
+  "accent2": "#5fd08a",
+  "desc": "把箱子全部推到目标点。箱子只能推不能拉，小心别把箱子推到死角。",
+  "hint": "方向键 / 滑动移动 · 撤销 / 重做 / 下一关",
+  "order": 20,
+  "turnBased": true,
+  "audio": true
+}

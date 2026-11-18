@@ -1,0 +1,16 @@
+{
+  "id": "jumper",
+  "title": "蓄力跳",
+  "subtitle": "Power Jump",
+  "category": "casual",
+  "modes": ["solo"],
+  "inputs": ["action", "keys"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#a78bfa",
+  "accent2": "#c4b5fd",
+  "desc": "按住蓄力、松开起跳，飞向下一个平台；力度决定水平速度，落在平台中心触发完美加成，掉下屏幕即结束。",
+  "hint": "按住空格 / 画面蓄力 · 松开起跳 · ←→ 选方向 · R 重开",
+  "order": 24,
+  "turnBased": false,
+  "audio": true
+}

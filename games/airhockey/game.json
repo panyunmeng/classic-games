@@ -1,0 +1,18 @@
+{
+  "id": "airhockey",
+  "title": "空气曲棍球",
+  "subtitle": "Air Hockey",
+  "category": "arcade",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["drag", "keys"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#38bdf8",
+  "accent2": "#e0f2fe",
+  "desc": "竖屏球桌上下各守一拍，圆盘在桌上高速反弹，把球打进对方球门，先到 7 分获胜。",
+  "hint": "单人：WASD / ↑↓←→ 或拖拽控下拍 · 双人：上方 WASD、下方 ↑↓←→ · 空格发球",
+  "order": 29,
+  "turnBased": false,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

@@ -1,0 +1,17 @@
+{
+  "id": "snake",
+  "title": "贪吃蛇",
+  "subtitle": "Grid Snake",
+  "category": "arcade",
+  "modes": ["solo"],
+  "inputs": ["keys", "swipe"],
+  "buttons": [{ "id": "toggle", "label": "穿墙" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#6cf0a8",
+  "accent2": "#6ad9ff",
+  "desc": "吃掉果实让蛇变长，撞墙或咬到自己就结束。速度会越来越快，可切换穿墙模式。",
+  "hint": "方向键 / 滑动屏幕转向 · T 切换穿墙",
+  "order": 1,
+  "turnBased": false,
+  "audio": true
+}

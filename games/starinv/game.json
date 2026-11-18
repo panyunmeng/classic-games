@@ -1,0 +1,17 @@
+{
+  "id": "starinv",
+  "title": "星际入侵",
+  "subtitle": "Star Invaders",
+  "category": "action",
+  "modes": ["solo"],
+  "inputs": ["drag", "keys"],
+  "buttons": [{ "id": "shoot", "label": "开火" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#f43f5e",
+  "accent2": "#fb923c",
+  "desc": "守卫星域：左右机动、开火清剿 5×10 敌机编队，利用掩体抵挡敌弹，撑过一波波加速进攻。",
+  "hint": "←/→ 或 A/D 移动 · Space 开火 · 手机上按住画布拖拽移动并自动开火",
+  "order": 9,
+  "turnBased": false,
+  "audio": true
+}

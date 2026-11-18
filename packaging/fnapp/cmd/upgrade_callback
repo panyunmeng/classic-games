@@ -1,0 +1,9 @@
+#!/bin/bash
+# 升级后：重新拉起服务。
+# 不自动 start 的话，升级完成后应用会一直停在「已停止」，
+# 用户会以为升级失败，实际只是没启动。
+set -u
+MAIN="${TRIM_APPDEST:-}/cmd/main"
+[ -x "${MAIN}" ] || exit 0
+"${MAIN}" start
+exit $?

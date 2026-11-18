@@ -1,0 +1,18 @@
+{
+  "id": "snakeladder",
+  "title": "蛇梯棋",
+  "subtitle": "Snakes & Ladders",
+  "category": "board",
+  "modes": ["solo", "ai", "local2p"],
+  "inputs": ["tap"],
+  "buttons": [{ "id": "roll", "label": "掷骰" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#34d399",
+  "accent2": "#f472b6",
+  "desc": "10×10 蛇形棋盘，掷骰前进；踩到梯子向上冲，踩到蛇滑下去，恰好停在 100 才获胜。",
+  "hint": "点击「掷骰」或盘面 / 空格前进 · 超出 100 停在原地 · 蛇只滑一次",
+  "order": 34,
+  "turnBased": true,
+  "audio": true,
+  "ai": true
+}

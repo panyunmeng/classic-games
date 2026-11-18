@@ -1,0 +1,17 @@
+{
+  "id": "bubbler",
+  "title": "泡泡消消",
+  "subtitle": "Bubble Pop",
+  "category": "arcade",
+  "modes": ["solo"],
+  "inputs": ["drag", "keys"],
+  "buttons": [{ "id": "shoot", "label": "发射" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#22d3ee",
+  "accent2": "#f472b6",
+  "desc": "错位蜂窝泡泡阵，瞄准发射，同色三连即消；被打断的悬空泡泡整片坠落，连消加倍。每发之后顶棚还会落下一行。",
+  "hint": "←→ 或按住拖拽瞄准 · 空格 / 发射键开炮",
+  "order": 18,
+  "turnBased": false,
+  "audio": true
+}

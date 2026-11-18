@@ -1,0 +1,25 @@
+{
+  "id": "stackbattle",
+  "title": "方块对战",
+  "subtitle": "Block Duel",
+  "category": "puzzle",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["keys", "swipe"],
+  "buttons": [
+    { "id": "left", "label": "◀" },
+    { "id": "right", "label": "▶" },
+    { "id": "rotate", "label": "转" },
+    { "id": "drop", "label": "落" },
+    { "id": "hold", "label": "存" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#818cf8",
+  "accent2": "#f472b6",
+  "desc": "两场方块各自坠落，消行给对手送垃圾行：垃圾行带一个缺口、塞到底部把整堆顶起来，先被顶出盘面者负。",
+  "hint": "←→ 移动 · ↓ 软降 · 空格硬降 · X 旋转 · C/H 暂存 ｜ 双人：左场 WASD+F/Q，右场 ←→↓+↑/空格/X/C",
+  "order": 30,
+  "turnBased": false,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

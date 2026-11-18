@@ -1,0 +1,14 @@
+#!/bin/bash
+# 配置变更后：端口/开关改了，必须重启才生效。
+# 只在确实在跑的时候重启；没跑就什么都不做，让下次启动读新值。
+set -u
+MAIN="${TRIM_APPDEST:-}/cmd/main"
+[ -x "${MAIN}" ] || exit 0
+
+if "${MAIN}" status >/dev/null 2>&1; then
+    "${MAIN}" stop >/dev/null 2>&1 || true
+    "${MAIN}" start
+    exit $?
+fi
+
+exit 0

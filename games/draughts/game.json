@@ -1,0 +1,18 @@
+{
+  "id": "draughts",
+  "title": "国际跳棋",
+  "subtitle": "Checkers",
+  "category": "board",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["tap", "keys"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#f87171",
+  "accent2": "#fca5a5",
+  "desc": "8×8 国际跳棋：斜走吃子、强制吃子、连吃、底线升王。支持人机、同屏双人与联机。",
+  "hint": "点起点再点终点走棋 · 方向键移光标 · Enter 确认",
+  "order": 9,
+  "turnBased": true,
+  "online": true,
+  "audio": true,
+  "ai": true
+}

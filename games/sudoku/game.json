@@ -1,0 +1,22 @@
+{
+  "id": "sudoku",
+  "title": "数独",
+  "subtitle": "Sudoku",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["tap", "keys"],
+  "buttons": [
+    { "id": "note", "label": "笔记" },
+    { "id": "hint", "label": "提示" },
+    { "id": "undo", "label": "撤销" },
+    { "id": "erase", "label": "擦除" }
+  ],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#a78bfa",
+  "accent2": "#c4b5fd",
+  "desc": "9×9 标准数独，唯一解生成。点格选位，1～9 填数，支持笔记候选、提示、错误高亮与撤销。",
+  "hint": "点格选位 · 1～9 填数 · N 笔记 · U 撤销",
+  "order": 12,
+  "turnBased": true,
+  "audio": true
+}

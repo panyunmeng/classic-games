@@ -1,0 +1,17 @@
+{
+  "id": "pipes",
+  "title": "管道连接",
+  "subtitle": "Pipe Link",
+  "category": "puzzle",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "buttons": [{ "id": "reset", "label": "重置" }, { "id": "hint", "label": "提示" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#22d3ee",
+  "accent2": "#67e8f9",
+  "desc": "点击旋转管道，让水从水源流到所有终点。支持 5×5 / 6×6 / 7×7 难度。",
+  "hint": "点击管道旋转 · 5/6/7 切换难度 · R 重开",
+  "order": 21,
+  "turnBased": true,
+  "audio": true
+}

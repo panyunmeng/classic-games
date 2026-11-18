@@ -1,0 +1,17 @@
+{
+  "id": "bomber",
+  "title": "爆破迷宫",
+  "subtitle": "Blast Maze",
+  "category": "action",
+  "modes": ["solo"],
+  "inputs": ["keys", "swipe"],
+  "buttons": [{ "id": "bomb", "label": "炸弹" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#f59e0b",
+  "accent2": "#fbbf24",
+  "desc": "在钢柱与砖墙的迷宫里布雷：2 秒引信、十字火焰，炸毁砖墙、清光敌人，砖后还藏着道具。",
+  "hint": "方向键 / WASD / 滑动移动 · 空格或「炸弹」放弹 · 3 条命",
+  "order": 31,
+  "turnBased": false,
+  "audio": true
+}

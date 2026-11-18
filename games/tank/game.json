@@ -1,0 +1,18 @@
+{
+  "id": "tank",
+  "title": "坦克战场",
+  "subtitle": "Tank Arena",
+  "category": "action",
+  "modes": ["solo", "ai", "local2p", "online"],
+  "inputs": ["keys", "swipe"],
+  "buttons": [{ "id": "shoot", "label": "开火" }],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#7ac043",
+  "accent2": "#f5c542",
+  "desc": "在 13×13 的钢铁与砖墙阵地里驾驶坦克，击毁全部敌车过关，3 条命、子弹可互消。",
+  "hint": "方向键 / WASD 移动 · 空格或「开火」射击 · 滑动换向 · 双人：p1 WASD+空格，p2 方向键+回车",
+  "order": 27,
+  "turnBased": false,
+  "online": true,
+  "audio": true
+}

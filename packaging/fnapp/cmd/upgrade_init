@@ -1,0 +1,8 @@
+#!/bin/bash
+# 升级前：停掉旧进程，避免新旧两套代码抢同一个端口/同一个 socket 文件
+set -u
+MAIN="${TRIM_APPDEST:-}/cmd/main"
+if [ -x "${MAIN}" ]; then
+    "${MAIN}" stop >/dev/null 2>&1 || true
+fi
+exit 0

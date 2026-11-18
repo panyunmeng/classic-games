@@ -1,0 +1,412 @@
+/* 经典游戏合集 · 设计令牌与游戏外壳样式
+ * 与《设计语言规范》同源：改这里前先确认 36 款游戏都还能看。
+ */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, "Microsoft YaHei", monospace;
+
+  --bg: #0a0d16;
+  --bg-soft: #0e1322;
+  --panel: rgba(16, 21, 34, 0.9);
+  --panel-2: rgba(24, 31, 48, 0.94);
+  --line: rgba(140, 165, 210, 0.16);
+  --line-soft: rgba(140, 165, 210, 0.09);
+  --text: #e8edf7;
+  --muted: #93a0b8;
+  --dim: #64708a;
+
+  --ok: #5fd08a;
+  --warn: #e8a33a;
+  --danger: #e05a4f;
+
+  --accent: #6cf0a8;
+  --accent-2: #6ad9ff;
+
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
+
+  --gap-1: 6px;
+  --gap-2: 12px;
+  --gap-3: 20px;
+  --gap-4: 32px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body { overflow: hidden; }
+
+#app { height: 100dvh; }
+
+/* ── 外壳 ─────────────────────────────────────────────── */
+
+.cg-root {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  background:
+    radial-gradient(1100px 700px at 50% -15%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 62%),
+    var(--bg);
+}
+
+.cg-top {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-2);
+  padding: 8px 12px;
+  min-height: 52px;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(10, 13, 22, 0.72);
+  backdrop-filter: blur(10px);
+  flex: none;
+}
+
+.cg-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color .15s, background .15s;
+}
+.cg-iconbtn:hover { border-color: var(--accent); background: var(--panel-2); }
+.cg-iconbtn:active { transform: scale(.96); }
+.cg-iconbtn[hidden] { display: none; }
+
+.cg-titlebox { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.cg-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cg-sub {
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cg-hud {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 0;
+}
+.cg-hud small { font-size: 11px; color: var(--dim); font-family: var(--font-sans); }
+.cg-hud .cg-best { color: var(--muted); font-size: 12px; font-family: var(--font-mono); }
+
+/* ── 画布区 ───────────────────────────────────────────── */
+
+.cg-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 10px;
+  overflow: hidden;
+  touch-action: none;
+}
+.cg-canvas {
+  display: block;
+  border-radius: var(--radius-lg);
+  background: #070a12;
+  box-shadow:
+    0 0 0 1px var(--line-soft),
+    0 18px 60px rgba(0, 0, 0, .45),
+    0 0 80px color-mix(in srgb, var(--accent) 8%, transparent);
+  touch-action: none;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ── 触屏控件 ─────────────────────────────────────────── */
+
+.cg-controls {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-2);
+  padding: 10px 16px 12px;
+  min-height: 72px;
+}
+.cg-controls[hidden] { display: none; }
+
+.cg-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 48px);
+  gap: 4px;
+}
+.cg-dpad button,
+.cg-actionbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 18px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background .1s, border-color .1s, transform .06s;
+}
+.cg-dpad button:active,
+.cg-dpad button.on,
+.cg-actionbtn:active,
+.cg-actionbtn.on {
+  background: color-mix(in srgb, var(--accent) 22%, var(--panel));
+  border-color: var(--accent);
+  transform: scale(.95);
+}
+.cg-dpad .d-up { grid-area: 1 / 2; }
+.cg-dpad .d-left { grid-area: 2 / 1; }
+.cg-dpad .d-right { grid-area: 2 / 3; }
+.cg-dpad .d-down { grid-area: 3 / 2; }
+
+.cg-actions { display: flex; gap: 10px; align-items: center; }
+.cg-actionbtn { width: 56px; height: 56px; font-size: 14px; font-weight: 600; }
+
+.cg-hint {
+  font-size: 12px;
+  color: var(--dim);
+  text-align: center;
+  line-height: 1.5;
+  padding: 0 12px;
+  flex: 1;
+}
+
+/* ── 覆盖层与面板 ─────────────────────────────────────── */
+
+.cg-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(5, 7, 13, .62);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+  overflow: auto;
+}
+.cg-overlay[hidden] { display: none; }
+
+.cg-panel {
+  width: min(420px, 100%);
+  max-height: calc(100dvh - 64px);
+  overflow: auto;
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .55);
+  text-align: center;
+}
+.cg-panel h1 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  letter-spacing: .06em;
+}
+.cg-panel h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  letter-spacing: .04em;
+}
+.cg-panel .cg-desc {
+  margin: 0 auto 16px;
+  max-width: 32em;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.cg-panel .cg-bigscore {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 4px 0 2px;
+}
+.cg-panel .cg-subline { font-size: 12px; color: var(--dim); margin-bottom: 16px; }
+
+.cg-modes { display: grid; gap: 10px; margin: 16px 0 6px; }
+.cg-mode {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .15s, background .15s;
+}
+.cg-mode:hover { border-color: var(--accent); background: var(--panel-2); }
+.cg-mode:active { transform: scale(.99); }
+.cg-mode .cg-mode-note { font-size: 11px; color: var(--dim); font-family: var(--font-sans); }
+.cg-mode.primary {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--panel));
+}
+
+.cg-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.cg-btn {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+}
+.cg-btn:hover { border-color: var(--accent); }
+.cg-btn.primary {
+  border-color: transparent;
+  background: var(--accent);
+  color: #071018;
+  font-weight: 700;
+}
+.cg-btn.ghost { background: transparent; }
+
+.cg-note {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+.cg-toast {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom) + 96px);
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(10, 13, 22, .92);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+  z-index: 20;
+  white-space: nowrap;
+}
+.cg-toast.show { opacity: 1; }
+
+/* ── 联机大厅 ─────────────────────────────────────────── */
+
+.cg-net { margin: 14px 0 4px; text-align: left; }
+.cg-net-status { font-size: 12px; color: var(--ok); margin-bottom: 10px; text-align: center; }
+.cg-net-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cg-net-actions .cg-mode { justify-content: center; text-align: center; min-height: 44px; }
+.cg-net-code { display: flex; gap: 8px; margin-top: 10px; }
+.cg-net-input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 15px;
+  font-family: var(--font-mono);
+  letter-spacing: .18em;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+}
+.cg-net-input:focus { border-color: var(--accent); }
+.cg-net-info {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  min-height: 18px;
+  line-height: 1.5;
+}
+
+/* ── 横屏收紧 ─────────────────────────────────────────── */
+
+@media (orientation: landscape) and (max-height: 480px) {
+  .cg-top { min-height: 44px; padding: 4px 10px; }
+  .cg-title { font-size: 14px; }
+  .cg-sub { display: none; }
+  .cg-stage { padding: 6px; }
+  .cg-controls { min-height: 60px; padding: 6px 12px; }
+  .cg-dpad { grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(3, 42px); }
+  .cg-dpad button { width: 42px; height: 42px; }
+  .cg-actionbtn { width: 50px; height: 50px; }
+  .cg-panel { padding: 16px; }
+  .cg-panel h1 { font-size: 20px; }
+  .cg-panel .cg-bigscore { font-size: 30px; }
+}
+
+/* 桌面端：无鼠标/触摸粗指针时不显示虚拟方向键，给键盘留空间 */
+@media (pointer: fine) and (hover: hover) {
+  .cg-controls.touch-only { display: none; }
+}
+
+/* 减少动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

@@ -1,0 +1,185 @@
+#!/bin/bash
+# 经典游戏合集 · 生命周期脚本
+#   main start|stop|status|restart
+#   status: 0=运行 3=未运行
+#
+# 与 3D 合集同构：status 同时核对进程 / 端口 / 网关 socket 三件事，
+# 进程在但监听没起来时不能报「运行中」（用户点开是空白）。
+set -u
+
+APP_NAME="classic-games"
+PKG_VAR="${TRIM_PKGVAR:-}"
+PKG_DEST="${TRIM_APPDEST:-}"
+PKG_TMP="${TRIM_PKGTMP:-}"
+PKG_HOME="${TRIM_PKGHOME:-}"
+TEMP_LOG="${TRIM_TEMP_LOGFILE:-}"
+
+PID_FILE="${PKG_VAR}/app.pid"
+LOG_FILE="${PKG_VAR}/app.log"
+SOCKET_PATH="${PKG_DEST}/app.sock"
+GATEWAY_PREFIX="/app/classic-games"
+NODE_BIN="/var/apps/nodejs_v24/target/bin"
+ENTRY="${PKG_DEST}/server/index.mjs"
+WEB_ROOT="${PKG_DEST}/www"
+
+PORT="${wizard_port:-8082}"
+ENABLE_PORT="${wizard_enable_port:-true}"
+LAN_ONLY="${wizard_lan_only:-false}"
+HOST="0.0.0.0"
+[ "${LAN_ONLY}" = "true" ] && HOST="127.0.0.1"
+
+log() {
+    printf '[%s] [main] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >>"${LOG_FILE}" 2>/dev/null || true
+}
+
+fail() {
+    local msg="$1"
+    log "ERROR ${msg}"
+    [ -n "${TEMP_LOG}" ] && printf '%s\n' "${msg}" >"${TEMP_LOG}"
+    return 1
+}
+
+valid_port() {
+    case "$1" in '' | *[!0-9]*) return 1 ;; esac
+    [ "$1" -ge 1024 ] && [ "$1" -le 65535 ]
+}
+
+pid_alive() {
+    local pid="$1"
+    [ -n "${pid}" ] || return 1
+    if [ -r "/proc/${pid}/stat" ]; then
+        local st
+        st=$(awk '{print $3}' "/proc/${pid}/stat" 2>/dev/null)
+        case "${st}" in Z | X) return 1 ;; esac
+    fi
+    kill -0 "${pid}" 2>/dev/null
+}
+
+read_pid() {
+    [ -r "${PID_FILE}" ] || return 1
+    local pid
+    pid=$(head -n 1 "${PID_FILE}" 2>/dev/null | tr -d '[:space:]')
+    pid_alive "${pid}" || return 1
+    printf '%s' "${pid}"
+}
+
+port_listening() {
+    [ "${ENABLE_PORT}" = "true" ] || return 0
+    ss -ltn 2>/dev/null | awk -v p=":${PORT}$" '$4 ~ p {found=1} END {exit !found}'
+}
+
+socket_present() { [ -S "${SOCKET_PATH}" ]; }
+
+truncate_log() {
+    [ -f "${LOG_FILE}" ] || return 0
+    local size
+    size=$(wc -c <"${LOG_FILE}" 2>/dev/null | tr -d ' ')
+    case "${size}" in '' | *[!0-9]*) return 0 ;; esac
+    if [ "${size}" -gt 10485760 ]; then
+        tail -c 2097152 "${LOG_FILE}" >"${LOG_FILE}.tmp" && mv "${LOG_FILE}.tmp" "${LOG_FILE}"
+    fi
+}
+
+start_app() {
+    [ -n "${PKG_VAR}" ] && [ -n "${PKG_DEST}" ] || {
+        fail "TRIM_* 环境变量缺失，无法启动（fnOS 框架异常）"
+        return 1
+    }
+    [ -x "${NODE_BIN}/node" ] || {
+        fail "缺少 Node 运行时 ${NODE_BIN}/node，请先在应用中心安装 Node.js v24"
+        return 1
+    }
+    [ -f "${ENTRY}" ] || { fail "缺少服务入口 ${ENTRY}"; return 1; }
+    [ -f "${WEB_ROOT}/index.html" ] || { fail "缺少静态产物 ${WEB_ROOT}/index.html"; return 1; }
+    valid_port "${PORT}" || { fail "端口 ${PORT} 不合法，应为 1024～65535"; return 1; }
+
+    if read_pid >/dev/null && socket_present; then
+        log "已在运行"
+        return 0
+    fi
+
+    truncate_log
+    mkdir -p "${PKG_VAR}" || { fail "无法创建数据目录 ${PKG_VAR}"; return 1; }
+    rm -f "${PID_FILE}" "${SOCKET_PATH}"
+
+    local listen_port="${PORT}"
+    [ "${ENABLE_PORT}" = "true" ] || listen_port="0"
+
+    if [ "${listen_port}" != "0" ] && ss -ltn 2>/dev/null | awk -v p=":${listen_port}$" '$4 ~ p {f=1} END {exit !f}'; then
+        local holder
+        holder=$(ss -ltnp 2>/dev/null | awk -v p=":${listen_port}$" '$4 ~ p' | head -1)
+        fail "端口 ${listen_port} 已被占用，请在应用设置里改端口。占用信息：${holder}"
+        return 1
+    fi
+
+    log "启动：port=${listen_port} host=${HOST} prefix=${GATEWAY_PREFIX} web=${WEB_ROOT}"
+    (
+        cd "${PKG_DEST}" || exit 1
+        PORT="${listen_port}" \
+        HOST="${HOST}" \
+        WEB_ROOT="${WEB_ROOT}" \
+        GATEWAY_SOCKET_PATH="${SOCKET_PATH}" \
+        GATEWAY_PREFIX="${GATEWAY_PREFIX}" \
+        NODE_ENV=production \
+        HOME="${PKG_HOME:-${PKG_VAR}}" \
+        TMPDIR="${PKG_TMP:-/tmp}" \
+            nohup "${NODE_BIN}/node" "${ENTRY}" >>"${LOG_FILE}" 2>&1 &
+        echo $! >"${PID_FILE}"
+    )
+
+    local pid
+    pid=$(head -n 1 "${PID_FILE}" 2>/dev/null | tr -d '[:space:]')
+    local i=0
+    while [ "${i}" -lt 60 ]; do
+        if socket_present && port_listening; then
+            log "启动完成 pid=${pid}"
+            return 0
+        fi
+        if ! pid_alive "${pid}"; then
+            fail "服务启动后立即退出，详见 ${LOG_FILE}：$(tail -n 3 "${LOG_FILE}" 2>/dev/null | tr '\n' ' ')"
+            return 1
+        fi
+        sleep 0.5
+        i=$((i + 1))
+    done
+    fail "服务在 30 秒内未就绪，详见 ${LOG_FILE}"
+    return 1
+}
+
+stop_app() {
+    local pid
+    if ! pid=$(read_pid); then
+        rm -f "${PID_FILE}"
+        [ -e "${SOCKET_PATH}" ] && rm -f "${SOCKET_PATH}"
+        return 0
+    fi
+    log "停止 pid=${pid}"
+    kill -TERM "${pid}" 2>/dev/null
+    local i=0
+    while pid_alive "${pid}" && [ "${i}" -lt 20 ]; do sleep 0.5; i=$((i + 1)); done
+    if pid_alive "${pid}"; then
+        log "TERM 超时，强制 KILL"
+        kill -KILL "${pid}" 2>/dev/null
+        sleep 0.5
+    fi
+    rm -f "${PID_FILE}"
+    [ -e "${SOCKET_PATH}" ] && rm -f "${SOCKET_PATH}"
+    log "已停止"
+    return 0
+}
+
+status_app() {
+    local pid
+    pid=$(read_pid) || return 3
+    socket_present || return 3
+    port_listening || return 3
+    return 0
+}
+
+case "${1:-}" in
+start) start_app || exit 1; exit 0 ;;
+stop) stop_app || exit 1; exit 0 ;;
+status) if status_app; then exit 0; else exit 3; fi ;;
+restart) stop_app && start_app; exit $? ;;
+*) echo "用法: $0 {start|stop|status|restart}" >&2; exit 1 ;;
+esac

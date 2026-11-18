@@ -1,0 +1,16 @@
+{
+  "id": "hopper",
+  "title": "过河青蛙",
+  "subtitle": "River Hop",
+  "category": "arcade",
+  "modes": ["solo"],
+  "inputs": ["keys", "swipe"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#84cc16",
+  "accent2": "#a3e635",
+  "desc": "帮几何小青蛙穿过车流与河道，把顶部 5 个洞位全部填满；踩住原木过河，3 条命、每关 30 秒。",
+  "hint": "方向键 / 滑动屏幕跳一格 · 踩原木过河，别撞车也别下水",
+  "order": 19,
+  "turnBased": false,
+  "audio": true
+}

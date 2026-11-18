@@ -1,0 +1,16 @@
+{
+  "id": "whack",
+  "title": "敲地鼠",
+  "subtitle": "Whack a Mole",
+  "category": "casual",
+  "modes": ["solo"],
+  "inputs": ["tap"],
+  "canvas": { "w": 480, "h": 640 },
+  "accent": "#a3e635",
+  "accent2": "#fbbf24",
+  "desc": "30 秒内敲中随机冒出的地鼠，连击越高加分越多，漏掉会断连击。",
+  "hint": "点击冒出的地鼠 · 连击 ×N 有额外加分",
+  "order": 21,
+  "turnBased": false,
+  "audio": true
+}
