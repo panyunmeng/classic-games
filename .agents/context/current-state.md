@@ -360,3 +360,11 @@ tank（坦克战场）、snakebattle（贪吃蛇大作战）、stackbattle（方
 ### 下一步
 - git init + 中文首次提交 + 推 Gitea（技能 gitea-workspace-git-init）。
 - 版本号 dev → 正式（build 传 APP_VERSION）可选优化。
+
+## 2026-11-19 01:10 — 版本管理初始化完成
+
+- 本地 `git init` + 首次提交 `88e0c7b`（中文 emoji Conventional Commits，-F 走 UTF-8 文件）。
+- 远端：`http://panyunmeng.cn:3000/panyunmeng/jingdian-youxi-heji.git`（私有，中文名按 AlphaDashDot 转写拼音；建仓时 description 中文经 shell 直传会 422「invalid UTF-8」，改 `--data-binary @file` 传 UTF-8 JSON 后 201）。
+- `main` 已建立 `origin/main` 跟踪，`git ls-remote` SHA 与本地一致。
+- `.gitignore`：build/、node_modules/、screens/、日志。
+- 凭据临时文件已清理（token 只在内存变量）。
