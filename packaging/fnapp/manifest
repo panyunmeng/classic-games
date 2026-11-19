@@ -3,11 +3,13 @@ version               = 0.1.0
 display_name          = 经典游戏合集
 desc                  = 36 款经典小游戏合集：贪吃蛇、扫雷、俄罗斯方块、五子棋、2048 等，支持电脑与手机浏览器，棋类含人机与联机对战。<br>可经端口直接访问，也可经 fnOS 统一网关从 <code>/app/classic-games</code> 进入。
 platform              = x86
+# 运行时装在应用中心，不属于本包；不声明的话干净设备上装完起不来
+install_dep_apps      = nodejs_v24
 source                = thirdparty
 maintainer            = 潘云孟
-maintainer_url        = http://panyunmeng.cn:3000/panyunmeng
+maintainer_url        = https://github.com/panyunmeng/classic-games
 distributor           = 潘云孟
-distributor_url       = http://panyunmeng.cn:3000/panyunmeng
+distributor_url        = https://github.com/panyunmeng/classic-games
 os_min_version        = 1.2.0
 desktop_uidir         = ui
 desktop_applaunchname = classic-games.main

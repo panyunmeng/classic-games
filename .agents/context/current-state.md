@@ -368,3 +368,54 @@ tank（坦克战场）、snakebattle（贪吃蛇大作战）、stackbattle（方
 - `main` 已建立 `origin/main` 跟踪，`git ls-remote` SHA 与本地一致。
 - `.gitignore`：build/、node_modules/、screens/、日志。
 - 凭据临时文件已清理（token 只在内存变量）。
+
+## 2026-11-19 09:40 — 推 GitHub + 修 fnOS 上架硬缺口
+
+### GitHub
+
+公开仓库 `https://github.com/panyunmeng/classic-games`（Gitea 那条是
+`jingdian-youxi-heji`，两处命名不同：GitHub 用 `classic-games` 与 package.json /
+manifest appname 一致）。三方 SHA 一致：本地 = origin = github = `b4a05d5`。
+匿名访问 raw.githubusercontent 返回 200，确认确实公开。
+
+推法（本机特有，避免踩坑）：远端必须写 `https://panyunmeng@github.com/...`
+——带用户名才绕过 `~/.gitconfig` 里 `insteadOf` 对 `https://github.com/` 的改写
+（改写后走 gh-proxy，而那条 token 已失效）；另需
+`git config http."https://github.com/".schannelCheckRevoke false`
+（Steam++ 加速器阻断 CRL 查询，schannel 报 `CRYPT_E_NO_REVOCATION_CHECK`）。
+
+### 修掉上架硬缺口（对照 developer.fnnas.com）
+
+| 缺口 | 修法 | 为什么是硬缺口 |
+| --- | --- | --- |
+| manifest 没声明 `install_dep_apps` | 加 `install_dep_apps = nodejs_v24` | `cmd/main` 用 `/var/apps/nodejs_v24/target/bin/node`，不声明则干净设备装完起不来。官方文档明确要求「在 manifest 中通过 install_dep_apps 声明所需的运行时包」 |
+| `maintainer_url`/`distributor_url` 指内网 Gitea | 改 `https://github.com/panyunmeng/classic-games` | 审核方与用户都打不开内网地址 |
+
+3D 游戏合集同缺口一并修（改 `3D游戏聚合平台/fnapp/manifest`），保持两个项目一致。
+
+### 验证
+
+```
+node scripts/build.mjs    36 款全量构建通过
+node scripts/pack.mjs     classic-games.tar.gz 401 KB
+node scripts/deploy.mjs   fnpack 接受新 manifest → classic-games.fpk 426 KB
+node scripts/deploy.mjs --install   卸载重装成功
+```
+装完回读 `/var/apps/classic-games/manifest`：`install_dep_apps = nodejs_v24`
+与 GitHub URL 都在（fnpack 没丢字段）。
+进程以 `/var/apps/nodejs_v24/target/bin/node` 运行，监听 0.0.0.0:8082，根与
+games/* 全部 200。
+
+3D 合集 `deploy.mjs --install` **没有真正安装**（它只产出 fpk 就走「手工安装」分支），
+已改用 appcenter-cli 直接卸载重装，回读 manifest 同样含 install_dep_apps，
+:8081 根与 games/* 全部 200。
+
+### 上架还差什么（需人工）
+
+- **提交入口**：开发者后台未上线前，走「应用中心开发者先锋交流群」
+  （从飞牛粉丝群联系社区主理人加入），或飞书表单。这是人工动作，我做不到。
+- **LICENSE**：README 写的是「暂未授予开源许可」。官方把 LICENSE 定位为
+  「安装前需同意的隐私协议（可选）」，但公开分发建议有。
+- **os_min_version = 1.2.0** 要按实际测过的版本填，目前只在 NAS（fnOS 1.2.x）验过。
+- 上架材料已就绪：fpk 426 KB、ICON.PNG(64) + ICON_256.PNG(256)、
+  docs/screenshots 7 张真实界面图（门户桌面 + 6 款手机竖屏）。
