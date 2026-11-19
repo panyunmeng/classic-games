@@ -53,8 +53,11 @@ async function remote(script, label) {
 
 function putFile(localPath, remotePath) {
   console.log(c.dim(`  → 上传 ${path.basename(localPath)}`));
-  const helper = path.join(ROOT, 'scripts', 'ssh-put.sh');
-  const r = spawnSync('bash', [helper.split(path.sep).join('/'), localPath.split(path.sep).join('/'), remotePath], {
+  // 走 pwsh 而不是 bash：DSH 的 win_bash 会话里 /tmp 是私有 MSYS 挂载，
+  // 与 Git 的 chmod.exe/base64.exe 看到的路径不一致，shim 写完就找不到；
+  // pwsh 用 .NET 直接读文件 + 复用 W.FNOS维护 的 askpass 垫片，稳定得多。
+  const helper = path.join(ROOT, 'scripts', 'ssh-put.ps1');
+  const r = spawnSync('pwsh', ['-NoProfile', '-File', helper, localPath, remotePath], {
     encoding: 'utf8',
   });
   const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim();

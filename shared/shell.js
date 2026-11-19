@@ -509,6 +509,10 @@ export async function createShell(cfg) {
     get online() {
       return online;
     },
+    /** 供 render 读取输入层自定义状态（如扫雷插旗模式） */
+    get input() {
+      return inputAdapter;
+    },
     state: () => remoteState || game?.state?.(),
     submit,
     applyRemote(action, playerIndex = 1) {

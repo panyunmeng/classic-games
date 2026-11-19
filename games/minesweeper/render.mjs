@@ -168,7 +168,17 @@ export function render(ctx, state, view) {
   ctx.font = `13px ${FONT}`;
   const remain = Math.max(0, state.mines - state.flags);
   ctx.fillText(`剩余雷 ${remain} / ${state.mines}   翻开 ${state.opened}`, view.w / 2, 58);
-  if (state.canUndo) {
+  // 插旗模式提示：手机端长按易被系统菜单打断，这是主要插旗入口
+  const adapter = view.shell && view.shell.input;
+  const flagMode = Boolean(adapter && typeof adapter.isFlagMode === 'function' && adapter.isFlagMode());
+  if (flagMode) {
+    ctx.fillStyle = 'rgba(229, 115, 105, 0.95)';
+    roundRect(ctx, view.w / 2 - 96, 88, 192, 30, 8);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = `700 14px ${FONT}`;
+    ctx.fillText('🚩 插旗模式 · 点格子插旗', view.w / 2, 108);
+  } else if (state.canUndo) {
     ctx.fillStyle = 'rgba(200, 134, 60, 0.85)';
     ctx.font = `12px ${FONT}`;
     ctx.fillText('U / 撤销按钮 可回退', view.w / 2, 78);
