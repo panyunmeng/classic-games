@@ -419,3 +419,14 @@ games/* 全部 200。
 - **os_min_version = 1.2.0** 要按实际测过的版本填，目前只在 NAS（fnOS 1.2.x）验过。
 - 上架材料已就绪：fpk 426 KB、ICON.PNG(64) + ICON_256.PNG(256)、
   docs/screenshots 7 张真实界面图（门户桌面 + 6 款手机竖屏）。
+
+---
+
+## 2026-11-19 收尾：扫雷插旗修复入库并双远端推送
+
+- 线上部署已完成（fpk 427 KB，`/var/apps/classic-games` 运行中，:8082 healthz ok，36 款）。
+- 线上插旗交互验收通过（`BASE_URL=http://panyunmeng.cn:8082 node tools/check-minesweeper-flag.mjs`）。
+- 提交前全量回归：**560/560 单测通过**，36 款构建通过。
+- 提交 `9469e6c` 已推送：origin（Gitea `jingdian-youxi-heji`）与 github（`panyunmeng/classic-games`）均到 `9469e6c`。
+- Chrome 进程归零（0）。
+- 上架仍差的人工动作不变：开发者后台/交流群提交、LICENSE 决定、os_min_version 按实测版本填。
